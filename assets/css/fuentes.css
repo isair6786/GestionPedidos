@@ -1,0 +1,5 @@
+@font-face {
+    font-family: Font-Awesome;
+    src: url('../css/font/FontAwesome5Brands-Regular-400.otf'),
+    url('../css/font/FontAwesome5Free-Regular-400.otf'),url('../css/font/FontAwesome5Free-Solid-900.otf');
+}

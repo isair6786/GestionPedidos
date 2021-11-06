@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+html,
+body,
+.container {
+    margin: 0px !important;
+    padding: 0px !important;
+    transition: all 1s;
+}
+
+#ImageLogin {
+    height: 100vh;
+    padding: 0px;
+}
+
+.imagelogin {
+    margin-left: -50px;
+    width: 500px;
+    height: 500px;
+}
+
+.imageregister {
+    margin-top: 20vh;
+    width: 500px;
+    height: 500px;
+}
+
+.imagelogintwo {
+    width: 400px;
+    height: 300px;
+    margin-top: -300px;
+    margin-left: 50px;
+}
+
+#loginform {
+    padding-top: 30vh;
+    padding-left: 10vw;
+}
+
+#loginformRegister {
+    padding-top: 5vh;
+}
+
+#loginformRegister form {
+    text-align: center;
+}
+
+.form-group {
+    font-family: 'Secular One', sans-serif;
+}
+
+.form-group label {
+    text-align: left !important;
+}
+
+.form-control.textboxlogin {
+    margin: 0 auto;
+    width: 300px;
+    border-radius: 30px;
+    border: 0px;
+    background-color: #ECECEC;
+}
+
+.form-control.textboxregister {
+    margin: 0 auto;
+    width: 400px;
+    border-radius: 30px;
+    border: 0px;
+    background-color: #ECECEC;
+}
+
+form h2 {
+    font-family: 'Secular One', sans-serif;
+}
+
+.btn.buttonform {
+    font-family: 'Secular One', sans-serif;
+    color: #fff;
+    background: #de161d;
+    border-radius: 30px;
+    border: 0px;
+    padding: 15px;
+    width: auto;
+}
+
+.btn.buttonform:hover {
+    color: #fff;
+    background: #a30f14;
+}
+
+form a {
+    text-decoration: none;
+    color: #352f2f;
+}
+
+form a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+.registertext {
+    margin-left: 50px;
+    text-decoration: none;
+    color: gray;
+}
+
+
+/*Small screen*/
+
+@media only screen and (max-width:990px) {
+    #ImageLogin {
+        display: none;
+    }
+    #contentRegister {
+        display: none;
+    }
+    #loginform {
+        background: url('../images/fondologin.svg') no-repeat;
+        background-size: 40%;
+        background-position: center;
+    }
+}
