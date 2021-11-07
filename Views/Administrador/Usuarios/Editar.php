@@ -1,7 +1,8 @@
-<?php             
-if(isset($_GET["Id"])){                
-require_once "Controlers/ctrUsuarios.php";            
-$datos = ControladorUsuarios::MostrarUsuarioPorId($_GET["Id"]);
+<?php 
+if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){            
+    if(isset($_GET["Id"])){                
+    require_once "Controlers/ctrUsuarios.php";            
+    $datos = ControladorUsuarios::MostrarUsuarioPorId($_GET["Id"]);
 ?>
 
 <nav aria-label="breadcrumb">
@@ -116,22 +117,34 @@ $datos = ControladorUsuarios::MostrarUsuarioPorId($_GET["Id"]);
 </html>
 
 <?php 
-}
-/*Validamos si se ha intentado hacer un registro  */
-if(isset($_POST["Usuario"])){
-    //Realizamos el ingreso del usuario 
-    require_once "Controlers/ctrUsuarios.php";
-  
-    $RegistroUsuario = ControladorUsuarios::EditarUsuario($_POST);
-     
-    if($RegistroUsuario){
-        echo "<script>
-            LanzarModal('success','Actualizacion Correcta','Usuario Actualizado Correctamente')
-            
-        </script>";
-    }else{
-        echo "<script>LanzarModal('danger','Actualizacion Falló','Error en la actualizacion, nombre de usuario ya existente , intente nuevamente')</script>";
-    }
+}//Fin carga de datos
+    /*Validamos si se ha intentado hacer un registro  */
+    if(isset($_POST["Usuario"])){
+        //Realizamos el ingreso del usuario 
+        require_once "Controlers/ctrUsuarios.php";
     
+        $RegistroUsuario = ControladorUsuarios::EditarUsuario($_POST);
+
+        if($RegistroUsuario){
+            echo "<script>
+                LanzarModal('success','Actualizacion Correcta','Usuario Actualizado Correctamente')
+
+            </script>";
+        }else{
+            echo "<script>LanzarModal('danger','Actualizacion Falló','Error en la actualizacion, nombre de usuario ya existente , intente nuevamente')</script>";
+        }
+
+    }
+}//fin validacion de usuario 
+else{
+    //Borramos todas las variables y mostramos nuevamente el login
+     echo 
+        '<script>
+            if(window.history.replaceState)
+            {
+                window.history.replaceState(null,null,"Login.php");
+            }
+            window.location.replace("Login.php");
+        </script>';
 }
 ?>

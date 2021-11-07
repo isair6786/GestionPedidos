@@ -3,8 +3,8 @@ const txtDescripcion = document.querySelector("#txtDescripcion");
 const txtStock = document.querySelector("#txtStock");
 const txtPrecio = document.querySelector("#txtPrecio");
 const btnRegistrar = document.querySelector("#btnRegistrar");
-const Switch = document.querySelector('#customSwitches');
-const SwitchText = document.querySelector('#SwitchName');
+const Switch = document.querySelector('#customSwitch1');
+const SwitchText = document.querySelector('#TextcustomSwitch1');
 
 
 /*INICIAR EVENTOS */
@@ -74,11 +74,13 @@ function EventListeners() {
 function CambiarLetraSwitch() {
     if (Switch.checked == true) {
 
+
         SwitchText.classList.add("text-primary");
         SwitchText.innerHTML = "Activo"
 
 
     } else {
+
         SwitchText.classList.remove("text-primary");
         SwitchText.innerHTML = "Inactivo"
     }

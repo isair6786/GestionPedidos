@@ -15,11 +15,7 @@ class ControladorAdminDashboard
                 require_once "Views/Administrador/$Modulo/".$Pagina.".php";
            }else{
                 require_once "Views/Administrador/Error404.php";
-           }
-        
-            
-        
-        
+           }        
     }  
     public function MostrarPlantilla()
     {

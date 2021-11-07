@@ -1,3 +1,6 @@
+<?php 
+if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
+ ?>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="Login.php?Pagina=Dashboard">Dashboard</a></li>
@@ -84,22 +87,34 @@
 
 <?php 
 /*Validamos si se ha intentado hacer un registro  */
-if(isset($_POST["Usuario"])){
-    //Realizamos el ingreso del usuario 
-    require_once "Controlers/ctrUsuarios.php";
+    if(isset($_POST["Usuario"])){
+        //Realizamos el ingreso del usuario 
+        require_once "Controlers/ctrUsuarios.php";
+        
     
-   
-    $RegistroUsuario = ControladorUsuarios::RegistroNuevoUsuario($_POST);
-    
-    if($RegistroUsuario){
-        echo "<script>
-            LanzarModal('success','Registro Correcto','Usuario Registrado Correctamente')
-            
-        </script>";
-    }else{
-        echo "<script>LanzarModal('danger','Registro no completado','Error en el registro, nombre de usuario ya existente , intente nuevamente')</script>";
+        $RegistroUsuario = ControladorUsuarios::RegistroNuevoUsuario($_POST);
+        
+        if($RegistroUsuario){
+            echo "<script>
+                LanzarModal('success','Registro Correcto','Usuario Registrado Correctamente')
+                
+            </script>";
+        }else{
+            echo "<script>LanzarModal('danger','Registro no completado','Error en el registro, nombre de usuario ya existente , intente nuevamente')</script>";
+        }
+        
     }
-    
-}
+}//Cierre validacion de usuario 
+else{
+    //Borramos todas las variables y mostramos nuevamente el login
+     echo 
+        '<script>
+            if(window.history.replaceState)
+            {
+                window.history.replaceState(null,null,"Login.php");
+            }
+            window.location.replace("Login.php");
+        </script>';
+  }
 ?>
 

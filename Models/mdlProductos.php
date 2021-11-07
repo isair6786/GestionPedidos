@@ -15,7 +15,7 @@ class ModeloProductos
         $query->bindParam(2,$datos["Imagen"],PDO::PARAM_STR);
         $query->bindParam(3,$datos["Stock"],PDO::PARAM_INT);
         $query->bindParam(4,$datos["Precio"],PDO::PARAM_STR);
-        $query->bindParam(5,$datos["Activo"],PDO::PARAM_BOOL);
+        $query->bindParam(5,$datos["txtActivo"],PDO::PARAM_BOOL);
 
         if($query->execute())
         {
@@ -39,19 +39,14 @@ class ModeloProductos
         $query=RealizarConexion::ConectarBaseDatos()->
         prepare("CALL SP_EDITAR_PRODUCTO
         (?,?,?,?,?,?)");
-
-        
-        if ($Activo == null) {
-            $Activo = true;
-        };
-        if ($Imagen== null) {
-            $Imagen = $datos["Imagen"];
-        };
-        
-
         $query->bindParam(1,$datos["Id"],PDO::PARAM_INT);
         $query->bindParam(2,$datos["Descripcion"],PDO::PARAM_STR);
-        $query->bindParam(3,$Imagen,PDO::PARAM_STR);
+        if ($Imagen== null) {
+            $query->bindParam(3,$datos["Imagen"],PDO::PARAM_STR);
+            
+        }else{
+            $query->bindParam(3,$Imagen,PDO::PARAM_STR);
+        }                
         $query->bindParam(4,$datos["Stock"],PDO::PARAM_INT);
         $query->bindParam(5,$datos["Precio"],PDO::PARAM_STR);
         $query->bindParam(6,$Activo,PDO::PARAM_BOOL);
@@ -125,6 +120,27 @@ class ModeloProductos
         $query->bindParam("id",$id,PDO::PARAM_STR);
         $query->execute();
         $Columnas= $query->fetch();
+        $NumColumnas = $query->rowCount();     
+        if($NumColumnas<1){
+            //Si es vacio es que no existe el usuario 
+            return false;
+        }
+        else
+        {
+            //Si trae respuesta devolvemos la consulta
+            return $Columnas;
+            
+        }
+        $query->close();
+        $query=null;
+    }
+    static public function SeleccionarProductosActivos()
+    {
+        $query=RealizarConexion::ConectarBaseDatos()->
+        prepare("SELECT * FROM PRODUCTO WHERE Activo = true AND Stock>0");
+       
+        $query->execute();
+        $Columnas= $query->fetchAll();
         $NumColumnas = $query->rowCount();     
         if($NumColumnas<1){
             //Si es vacio es que no existe el usuario 

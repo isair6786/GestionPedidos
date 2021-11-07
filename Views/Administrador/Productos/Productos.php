@@ -1,3 +1,6 @@
+<?php 
+if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
+ ?>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="Login.php?Pagina=Dashboard">Dashboard</a></li>
@@ -10,7 +13,7 @@
 </a>
 <div  class="card shadow mb-4 col-sm-12">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -50,7 +53,7 @@
                         </td>
                         <td> 
                           <?php 
-                            echo '<img width="200" src="data:image/jpeg;base64,'.base64_encode( stripslashes($clave["Imagen"] )).'"/>';
+                            echo '<img width="200" src="data:image/jpeg;base64,'.base64_encode(stripslashes($clave["Imagen"] )).'"/>';
                             ?></td>
                         <td><?php echo($clave["Descripcion"]); ?></td>
                         <td><?php echo($clave["Stock"]); ?></td>
@@ -75,4 +78,15 @@
       </div>
   </div>
   <script src="assets/js/Producto/Eliminar.js"></script>
-     
+<?php
+}else{
+    //Borramos todas las variables y mostramos nuevamente el login
+     echo 
+        '<script>
+            if(window.history.replaceState)
+            {
+                window.history.replaceState(null,null,"Login.php");
+            }
+            window.location.replace("Login.php");
+        </script>';
+}?>   

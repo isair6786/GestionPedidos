@@ -1,3 +1,6 @@
+<?php 
+if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
+ ?>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="Login.php?Pagina=Dashboard">Dashboard</a></li>
@@ -36,8 +39,8 @@
                 <div class="form-group">
                   <label for="txtStock">Producto Activo</label>
                   <div class="custom-control custom-switch">
-                    <input name="Activo" type="checkbox" class="custom-control-input" id="customSwitches">
-                    <label class="custom-control-label" for="customSwitches" id="SwitchName"></label>
+                      <input name="txtActivo" type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+                      <label id="TextcustomSwitch1" class="custom-control-label" for="customSwitch1"></label>
                   </div>
                 </div>
                 <input id="btnRegistrar" class="btn btn-primary mb-3" type="submit" value="Registrar Producto"></input>
@@ -54,7 +57,7 @@
 
 <?php 
 /*Validamos si se ha intentado hacer un registro  */
-if(isset($_POST["Descripcion"])){
+  if(isset($_POST["Descripcion"])){ 
     //Realizamos el ingreso del usuario 
     require_once "Controlers/ctrProductos.php";
     
@@ -70,6 +73,18 @@ if(isset($_POST["Descripcion"])){
         echo "<script>LanzarModal('danger','Registro no completado','Error en el registro del producto, intente nuevamente')</script>";
     }
     
+  }
+}//Cierre validador de Usuario
+else{
+  //Borramos todas las variables y mostramos nuevamente el login
+   echo 
+      '<script>
+          if(window.history.replaceState)
+          {
+              window.history.replaceState(null,null,"Login.php");
+          }
+          window.location.replace("Login.php");
+      </script>';
 }
 ?>
 

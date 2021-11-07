@@ -15,10 +15,10 @@ class ControladorProductos
             $imgContenido = addslashes(file_get_contents($image));
             $datos["Imagen"] = $imgContenido;
         }
-        if($datos["Activo"]=="on"){
-            $datos["Activo"]= true;
+        if($datos["txtActivo"]=="on"){
+            $datos["txtActivo"]= true;
         }else{
-            $datos["Activo"]= false;
+            $datos["txtActivo"]= false;
         }
         $SinError = ModeloProductos::Registrar($datos);
         return $SinError;
@@ -28,11 +28,12 @@ class ControladorProductos
     //metodo para Editar Producto
     static public function EditarProducto($datos,$ImagenAntigua,$ImagenNueva)
     {   
-        if($datos["Activo"]=="on"){
-            $Activo = true;
-          }else{
-            $Activo = false;
-          } 
+       
+        if($datos["txtActivo"]=="on"){
+            $datos["txtActivo"]= true;
+        }else{
+            $datos["txtActivo"]= false;
+        }
 
         if($ImagenNueva!=null){
             $revisar = getimagesize($ImagenNueva["Imagen"]["tmp_name"]);
@@ -41,10 +42,10 @@ class ControladorProductos
                 $imgContenido = addslashes(file_get_contents($image));
                 $datos["Imagen"] = $imgContenido;
             }
-            $SinError = ModeloProductos::Editar($datos,$Activo,null);
+            $SinError = ModeloProductos::Editar($datos,$datos["txtActivo"],null);
         }else{
-           
-            $SinError = ModeloProductos::Editar($datos,$Activo,$ImagenAntigua);
+            $ImagenAntigua = addslashes(base64_decode($ImagenAntigua));
+            $SinError = ModeloProductos::Editar($datos,$datos["txtActivo"],$ImagenAntigua);
         }  
         
      
@@ -71,10 +72,10 @@ class ControladorProductos
         $Consulta = ModeloProductos::SeleccionarProductosPorID($id);
         return($Consulta);               
     }
-    static public function MostrarProductoUsuarioFinal()
+    static public function MostrarProductosActivos()
     {       
         require_once "Models/mdlProductos.php";
-        $Consulta = ModeloProductos::SeleccionarProductos();
+        $Consulta = ModeloProductos::SeleccionarProductosActivos();
         return($Consulta);               
     }
 

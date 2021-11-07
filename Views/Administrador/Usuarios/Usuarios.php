@@ -1,3 +1,6 @@
+<?php 
+if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){            
+?>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="Login.php?Pagina=Dashboard">Dashboard</a></li>
@@ -75,4 +78,17 @@
       </div>
   </div>
   <script src="assets/js/Usuario/Eliminar.js"></script>
-     
+<?php 
+} 
+else{
+    //Borramos todas las variables y mostramos nuevamente el login
+     echo 
+        '<script>
+            if(window.history.replaceState)
+            {
+                window.history.replaceState(null,null,"Login.php");
+            }
+            window.location.replace("Login.php");
+        </script>';
+}
+?>      
