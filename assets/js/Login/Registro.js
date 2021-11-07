@@ -101,6 +101,7 @@ function ValidarTelefono(e) {
 function MostrarError(error, e) {
     const CampoValidacion = document.querySelector("#Validacion" + e.target.id);
     CampoValidacion.innerHTML = error;
+    IniciarApp()
 }
 
 function QuitarError(e) {

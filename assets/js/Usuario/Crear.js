@@ -62,7 +62,7 @@ function ValidarDui(e) {
     } else {
         e.target.classList.remove("border", "border-success");
         e.target.classList.add("border", "border-danger");
-        MostrarError("Digite un Telefono valido", e);
+        MostrarError("Digite un DUI valido", e);
 
     }
 }
@@ -103,6 +103,7 @@ function ValidarTelefono(e) {
 function MostrarError(error, e) {
     const CampoValidacion = document.querySelector("#Validacion" + e.target.id);
     CampoValidacion.innerHTML = error;
+    IniciarApp()
 }
 
 function QuitarError(e) {

@@ -119,7 +119,7 @@ function VerPreviadeCarrito() {
     if (Carrito != null) {
         //Validamos que si el carrito tiene mas de dos items
         if ((Object.keys(Carrito).length) > 3) {
-            for (var contador = 1; contador < 3; contador++) {
+            for (var contador = 1; contador <= 3; contador++) {
                 var Item = document.createElement('div');
                 Item.classList.add("dropdown-item", "d-flex", "align-items-center");
                 Item.innerHTML = `
@@ -129,7 +129,8 @@ function VerPreviadeCarrito() {
                     </div>
                 </div>
                 <div>
-                    <div class="small text-gray-500">${Carrito[(Object.keys(Carrito)[contador])]["Cantidad"]}</div>
+                    <div class="text-dark-500">${Carrito[(Object.keys(Carrito)[contador])]["Descripcion"]}</div>
+                    <div class="text-gray-500">Cantidad: ${Carrito[(Object.keys(Carrito)[contador])]["Cantidad"]}</div>
                     <span class="font-weight-bold">Price : $ ${Carrito[(Object.keys(Carrito)[contador])]["Precio"]}</span>
                 </div>
                 `;

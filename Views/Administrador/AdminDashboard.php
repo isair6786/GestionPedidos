@@ -38,7 +38,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background:linear-gradient(6deg, rgba(4,19,40,1) 0%, rgba(12,80,171,1) 100%);"  id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -111,14 +111,14 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fas fa-fw fa-clipboard-check"></i>    
+                    <i class="fas fa-money-check-alt"></i> 
                 
                     <span>Cuentas</span>
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestionar Cuentas</h6>
-                        <a class="collapse-item" href="#">Admnistrar Cuentas</a>
+                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Cuentas">Admnistrar Cuentas</a>
                         
                     </div>
                 </div>
@@ -176,37 +176,6 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-shopping-cart fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">#</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Carro de Compras
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">Item</div>
-                                        <span class="font-weight-bold">Price : $$</span>
-                                    </div>
-                                </a>
-                                
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Mostrar todo el carrito</a>
-                            </div>
-                        </li>
-
-                        
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -262,7 +231,15 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                                     $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Productos");
                                 }
                                 
-                                break;    
+                                break;
+                            case 'Cuentas':
+                                    if(isset($_GET["Accion"])){
+                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],$_GET["Accion"]);
+                                    }else{
+                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Cuentas");
+                                    }
+                                    
+                                    break;     
                             
                             default:
                                 

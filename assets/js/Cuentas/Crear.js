@@ -1,7 +1,5 @@
 /* CONSTANTES*/
-const txtDescripcion = document.querySelector("#txtDescripcion");
-const txtStock = document.querySelector("#txtStock");
-const txtPrecio = document.querySelector("#txtPrecio");
+const txtSaldo = document.querySelector("#txtSaldo");
 const btnRegistrar = document.querySelector("#btnRegistrar");
 const Switch = document.querySelector('#customSwitch1');
 const SwitchText = document.querySelector('#TextcustomSwitch1');
@@ -25,17 +23,8 @@ function ValidarFormulario(e) {
         MostrarError("El campo es obligatorio", e);
 
     }
-    if (e.target.id == "txtDui") {
-        ValidarDui(e);
-    }
-    if (e.target.id == "txtTelefono") {
-        ValidarTelefono(e);
-    }
 
-    if (e.target.id == "txtCorreo") {
-        ValidarEmail(e);
-    }
-    if (txtDescripcion.value != '' && txtStock.value != '' && txtPrecio.value != '') {
+    if (txtSaldo.value != '') {
         btnRegistrar.disabled = false;
         btnRegistrar.style.cursor = "pointer"
 
@@ -65,9 +54,7 @@ function IniciarApp() {
 
 function EventListeners() {
     document.addEventListener("DOMContentLoaded", IniciarApp);
-    txtDescripcion.addEventListener('blur', ValidarFormulario);
-    txtStock.addEventListener('blur', ValidarFormulario);
-    txtPrecio.addEventListener('blur', ValidarFormulario);
+    txtSaldo.addEventListener('blur', ValidarFormulario);
     Switch.addEventListener('click', CambiarLetraSwitch);
 
 }
@@ -95,6 +82,6 @@ function LanzarModal(tipo, Titulo, Mensaje) {
         tipo
     )
     setTimeout(() => {
-        window.location.replace("Login.php?Pagina=Dashboard&Modulo=Productos")
+        window.location.replace("Login.php?Pagina=Dashboard&Modulo=Cuentas")
     }, 1500)
 }
