@@ -1,17 +1,15 @@
 /* CONSTANTES*/
-const txtSaldo = document.querySelector("#txtSaldo");
-const btnRegistrar = document.querySelector("#btnRegistrar");
+const txtSaldoAumentar = document.querySelector("#txtSaldo");
 const txtTarjeta = document.querySelector("#txtTarjeta");
-const Switch = document.querySelector('#customSwitch1');
-const SwitchText = document.querySelector('#TextcustomSwitch1');
+const btnRegistrar = document.querySelector("#btnRegistrar");
 const RegExTarjeta = /^[47][0-9]{14}$/;
+
 
 /*INICIAR EVENTOS */
 EventListeners();
 
 /*VALIDACIONES*/
 function ValidarFormulario(e) {
-
 
     if (e.target.value.length > 0) {
         e.target.classList.remove("border", "border-danger");
@@ -38,8 +36,7 @@ function ValidarFormulario(e) {
         }
 
     }
-
-    if (txtSaldo.value != '' && txtTarjeta != '' && RegExTarjeta.test(txtTarjeta.value)) {
+    if (txtSaldoAumentar.value != '' && txtTarjeta != '' && RegExTarjeta.test(txtTarjeta.value)) {
         btnRegistrar.disabled = false;
         btnRegistrar.style.cursor = "pointer"
 
@@ -64,31 +61,17 @@ function QuitarError(e) {
 function IniciarApp() {
     btnRegistrar.disabled = true;
     btnRegistrar.style.cursor = "not-allowed"
-    CambiarLetraSwitch();
+
 }
 
 function EventListeners() {
     document.addEventListener("DOMContentLoaded", IniciarApp);
     txtTarjeta.addEventListener('blur', ValidarFormulario);
-    txtSaldo.addEventListener('blur', ValidarFormulario);
-    Switch.addEventListener('click', CambiarLetraSwitch);
+    txtSaldoAumentar.addEventListener('blur', ValidarFormulario);
+
 
 }
 
-function CambiarLetraSwitch() {
-    if (Switch.checked == true) {
-
-
-        SwitchText.classList.add("text-primary");
-        SwitchText.innerHTML = "Activo"
-
-
-    } else {
-
-        SwitchText.classList.remove("text-primary");
-        SwitchText.innerHTML = "Inactivo"
-    }
-}
 
 //Modales
 function LanzarModal(tipo, Titulo, Mensaje) {

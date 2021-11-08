@@ -30,6 +30,7 @@ class ControladorLogin
         if($IngresoCorrecto!=false){
             
             $_SESSION["Usuario"]=array(
+                "idUsuario"=>$IngresoCorrecto["idUsuario"],
                 "nombre"=>$IngresoCorrecto["NombreUsuario"],
                 "Rol"=>$IngresoCorrecto["Rol"]);
             return($IngresoCorrecto);

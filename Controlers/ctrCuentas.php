@@ -28,9 +28,21 @@ class ControladorCuentas
         return $SinError;
                         
     }
+    static public function AumentarCuenta($datos)
+    {   
+       
+        $SinError = ModeloCuentas::Aumentar($datos);
+        return $SinError;
+                        
+    }
     static public function EliminarCuenta($id)
     {       
         $SinError = ModeloCuentas::Eliminar($id);
+        return $SinError;                
+    }
+    static public function ActivarCuenta($id)
+    {       
+        $SinError = ModeloCuentas::Activar($id);
         return $SinError;                
     }
 
@@ -47,6 +59,11 @@ class ControladorCuentas
     static public function MostrarCuentasActivas()
     {       
         $SinError = ModeloCuentas::SeleccionarCuentasActivas();
+        return $SinError;              
+    }
+    static public function MostrarCuentasPorUsuario($idUsuario)
+    {       
+        $SinError = ModeloCuentas::SeleccionarCuentasPorUsuario($idUsuario);
         return $SinError;              
     }
 

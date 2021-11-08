@@ -60,7 +60,7 @@ function ValidarDui(e) {
     } else {
         e.target.classList.remove("border", "border-success");
         e.target.classList.add("border", "border-danger");
-        MostrarError("Digite un Telefono valido", e);
+        MostrarError("Digite un DUI valido", e);
 
     }
 }

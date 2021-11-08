@@ -135,7 +135,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
         }
 
     }
-}//fin validacion de usuario 
+}//fin validacion de usaurio
 else{
     //Borramos todas las variables y mostramos nuevamente el login
      echo 

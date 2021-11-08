@@ -106,7 +106,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestionar Cuentas</h6>
-                        <a class="collapse-item" href="#">Admnistrar Cuentas</a>
+                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Cuentas">Admnistrar Cuentas</a>
                         
                     </div>
                 </div>
@@ -221,7 +221,15 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                                     $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Productos");
                                 }
                                 
-                                break;    
+                                break;
+                            case 'Cuentas':
+                                    if(isset($_GET["Accion"])){
+                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],$_GET["Accion"]);
+                                    }else{
+                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Cuentas");
+                                    }
+                                    
+                                    break;     
                             
                             default:
                                 

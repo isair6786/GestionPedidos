@@ -54,6 +54,27 @@ class ModeloCuentas
         $query->close();
         $query=null;
     }
+    static public function Aumentar($datos)
+    {
+        $query=RealizarConexion::ConectarBaseDatos()->
+        prepare("CALL SP_AUMENTAR_CUENTA
+        (?,?)");
+        $query->bindParam(1,$datos["IdCuenta"],PDO::PARAM_INT);
+        $query->bindParam(2,$datos["SaldoAñadir"],PDO::PARAM_STR);              
+        
+      
+
+        if($query->execute())
+        {
+            return true;
+        }
+        else
+        {  
+            return false; 
+        }
+        $query->close();
+        $query=null;
+    }
     static public function Eliminar($id)
     {
         $query=RealizarConexion::ConectarBaseDatos()->
@@ -63,6 +84,26 @@ class ModeloCuentas
              
 
         $query->bindParam(1,$id,PDO::PARAM_INT);
+        
+
+        if($query->execute())
+        {
+            return true;
+        }
+        else
+        { 
+            return false;  
+        }
+        $query->close();
+        $query=null;
+    }
+    static public function Activar($id)
+    {
+        $query=RealizarConexion::ConectarBaseDatos()->
+        prepare("UPDATE Cuentas SET Activo = true where IdCuenta = :id");
+
+
+        $query->bindParam("id",$id,PDO::PARAM_INT);
         
 
         if($query->execute())
@@ -123,6 +164,27 @@ class ModeloCuentas
         $query=RealizarConexion::ConectarBaseDatos()->
         prepare("SELECT * FROM CUENTAS WHERE Activo = true");
        
+        $query->execute();
+        $Columnas= $query->fetchAll();
+        $NumColumnas = $query->rowCount();     
+        if($NumColumnas<1){
+            //Si es vacio es que no existe el usuario 
+            return false;
+        }
+        else
+        {
+            //Si trae respuesta devolvemos la consulta
+            return $Columnas;
+            
+        }
+        $query->close();
+        $query=null;
+    }
+    static public function SeleccionarCuentasPorUsuario($IdUsuario)
+    {
+        $query=RealizarConexion::ConectarBaseDatos()->
+        prepare("SELECT * FROM CUENTAS WHERE IdUsuario = :id");
+        $query->bindParam("id",$IdUsuario,PDO::PARAM_STR);
         $query->execute();
         $Columnas= $query->fetchAll();
         $NumColumnas = $query->rowCount();     
