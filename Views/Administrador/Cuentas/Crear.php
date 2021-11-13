@@ -41,6 +41,11 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                     <div id="ValidaciontxtSaldo" style="color:red;font-size:12"></div>                
                 </div>
                 <div class="form-group">
+                        <label for="Saldo" class="form-label">Cargar a tarjeta </label>     
+                        <input name="Tarjeta" type="text" id="txtTarjeta" class="form-control textboxregister" placeholder="xxxxxxxxxxxxxx" >       
+                        <div id="ValidaciontxtTarjeta" style="color:red;font-size:12"></div>                
+                    </div>
+                <div class="form-group">
                     
                     <label for="" class="form-label">Cuenta Activo</label>     
                     <div class="custom-control custom-switch">

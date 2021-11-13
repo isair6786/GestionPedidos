@@ -141,7 +141,7 @@ class ModeloCuentas
     static public function SeleccionarCuentasPorID($id)
     {
         $query=RealizarConexion::ConectarBaseDatos()->
-        prepare("SELECT * FROM CUENTAS WHERE IDCUENTA = :id");
+        prepare("SELECT * FROM Cuentas WHERE IDCUENTA = :id");
         $query->bindParam("id",$id,PDO::PARAM_STR);
         $query->execute();
         $Columnas= $query->fetch();
@@ -162,7 +162,7 @@ class ModeloCuentas
     static public function SeleccionarCuentasActivas()
     {
         $query=RealizarConexion::ConectarBaseDatos()->
-        prepare("SELECT * FROM CUENTAS WHERE Activo = true");
+        prepare("SELECT * FROM Cuentas WHERE Activo = true");
        
         $query->execute();
         $Columnas= $query->fetchAll();
@@ -183,7 +183,7 @@ class ModeloCuentas
     static public function SeleccionarCuentasPorUsuario($IdUsuario)
     {
         $query=RealizarConexion::ConectarBaseDatos()->
-        prepare("SELECT * FROM CUENTAS WHERE IdUsuario = :id");
+        prepare("SELECT * FROM Cuentas WHERE IdUsuario = :id");
         $query->bindParam("id",$IdUsuario,PDO::PARAM_STR);
         $query->execute();
         $Columnas= $query->fetchAll();

@@ -76,7 +76,7 @@ function ValidarCantidadEnCarrito(Cantidad, Item) {
         if ((CantidadEnCarrito + Cantidad) > 20) {
             MostrarAlerta('No se pudo agregar al carrito!',
                 'La cantidad de productos totales debe ser menor a 21\nLa cantidad total actual  es ' +
-                CantidadEnCarrito + ", Agrege menos productos de " + Carrito[Item]["Descripcion"],
+                CantidadEnCarrito + ", Agrege menos productos ",
                 'info')
             CantidadValida = false
             return CantidadValida;
