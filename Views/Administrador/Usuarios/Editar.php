@@ -36,21 +36,21 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                             echo '
                             <option selected value="1">Administrador</option>
                             <option value="2">Cliente</option>
-                            <option value="3">Bodega</option>
+                            <option value="3">Gestor de Pedidos</option>
                             ';
                             break;
                         case 2:
                             echo '
                             <option  value="1">Administrador</option>
                             <option selected value="2">Cliente</option>
-                            <option value="3">Bodega</option>
+                            <option value="3">Gestor de Pedidos</option>
                             ';
                             break; 
                         case 3:
                             echo '
                             <option  value="1">Administrador</option>
                             <option  value="2">Cliente</option>
-                            <option selected value="3">Bodega</option>
+                            <option selected value="3">Gestor de Pedidos</option>
                             ';  
                             break;        
                     }?>"

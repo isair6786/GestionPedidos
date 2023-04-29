@@ -28,7 +28,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                     <select name="txtRol" class="custom-select" id="inputGroupSelect01">
                         <option selected value="1">Administrador</option>
                         <option value="2">Cliente</option>
-                        <option value="3">Bodega</option>
+                        <option value="3">Gestor de Pedidos</option>
                   </select>
                 </div>
                 

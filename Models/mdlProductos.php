@@ -116,7 +116,7 @@ class ModeloProductos
     static public function SeleccionarProductosPorID($id)
     {
         $query=RealizarConexion::ConectarBaseDatos()->
-        prepare("SELECT * FROM PRODUCTO WHERE IdProducto = :id");
+        prepare("SELECT * FROM Producto WHERE IdProducto = :id");
         $query->bindParam("id",$id,PDO::PARAM_STR);
         $query->execute();
         $Columnas= $query->fetch();
@@ -137,7 +137,7 @@ class ModeloProductos
     static public function SeleccionarProductosActivos()
     {
         $query=RealizarConexion::ConectarBaseDatos()->
-        prepare("SELECT * FROM PRODUCTO WHERE Activo = true AND Stock>0");
+        prepare("SELECT * FROM Producto WHERE Activo = true AND Stock>0");
        
         $query->execute();
         $Columnas= $query->fetchAll();

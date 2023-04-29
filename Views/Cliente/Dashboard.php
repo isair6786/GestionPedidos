@@ -13,7 +13,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gestion de Pedidos - Cliente
+    <title>Super Market - Cliente
     </title>
 
     
@@ -46,7 +46,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-box"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Gestion de Pedidos</div>
+                <div class="sidebar-brand-text mx-3">Super Market- Cliente</div>
             </a>
 
             <!-- Divider -->
@@ -77,8 +77,9 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestionar Pedidos</h6>
-                        <a class="collapse-item" href="#">Realizar Pedido</a>
-                        <a class="collapse-item" href="#">Estado de Pedidos</a>
+                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Pedidos&Accion=VerCarrito">Realizar Pedido</a>
+                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Pedidos">Ver mis pedidos</a>
+                        
                     </div>
                 </div>
             </li>
@@ -106,7 +107,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Gestionar Cuentas</h6>
-                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Cuentas">Admnistrar Cuentas</a>
+                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Cuentas">Manejo de Cuentas</a>
                         
                     </div>
                 </div>
@@ -168,7 +169,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                                 
                                     
                                 
-                                <a class="dropdown-item text-center small text-gray-500" href="Login.php?Pagina=Dashboard&Modulo=Productos">Mostrar todo el carrito</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="Login.php?Pagina=Dashboard&Modulo=Pedidos&Accion=VerCarrito">Mostrar todo el carrito</a>
                             </div>
                         </li>
 
@@ -181,15 +182,11 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bienvenido, <?php echo ( $_SESSION["Usuario"]["nombre"]) ?></span>
                                 <img class="img-profile rounded-circle" src="assets/images/undraw_profile.svg">
+                                <input type="hidden" id="txtNombreUsuario" value="<?php echo ( $_SESSION["Usuario"]["nombre"]) ?>">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Ver Perfil
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Modificar Perfil
-                                </a>
+                                
                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -207,11 +204,12 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                 <div class="container-fluid">
                 <!-- INICIO CONTENIDO -->
                 <?php 
+                $llamarPaginas = new ControladorClienteDashboard();
                     if(isset($_GET["Modulo"])){
 
                         require_once "Controlers/ctrClienteDashboard.php";
 
-                        $llamarPaginas = new ControladorClienteDashboard();
+                        
                         switch ($_GET["Modulo"]) {
                            
                             case 'Productos':
@@ -229,12 +227,22 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==2){
                                         $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Cuentas");
                                     }
                                     
-                                    break;     
+                                    break; 
+                            case 'Pedidos':
+                                    if(isset($_GET["Accion"])){
+                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],$_GET["Accion"]);
+                                    }else{
+                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Pedidos");
+                                    }
+                                        
+                                        break;              
                             
                             default:
                                 
                                 break;
                         }
+                    }else{
+                        $llamarPaginas ->MostrarModulo("Productos","Productos");
                     }
                 ?>     
                 
