@@ -3,8 +3,10 @@ session_start();
 require_once "Controlers/ctrLogin.php";
 require_once "Controlers/ctrAdminDashboard.php";
 require_once "Controlers/ctrClienteDashboard.php";
+require_once "Controlers/ctrBodegaDashboard.php";
 $MostrarLogin = new ControladorLogin();
 $MostrarDashAdmin = new ControladorAdminDashboard();
+$MostrarDashBodega = new ControladorBodegaDashboard();
 $MostrarDashCliente = new ControladorClienteDashboard();
 //Vemos que pagina se esta llamando
 if(isset($_GET["Pagina"])){
@@ -20,7 +22,11 @@ if(isset($_GET["Pagina"])){
                 if($_SESSION["Usuario"]["Rol"]==2){
                     //se redirige al dash de cliente
                     $MostrarDashCliente -> MostrarPagina("Dashboard");
-                }else if($_SESSION["Usuario"]["Rol"]==1){
+                }else if($_SESSION["Usuario"]["Rol"]==3){
+                    //se redirige al dash de admin
+                    $MostrarDashBodega -> MostrarPagina("BodegaDashboard");
+                } 
+                else if($_SESSION["Usuario"]["Rol"]==1){
                     //se redirige al dash de admin
                     $MostrarDashAdmin -> MostrarPagina("AdminDashboard");
                 } 

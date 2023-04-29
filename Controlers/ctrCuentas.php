@@ -65,6 +65,10 @@ class ControladorCuentas
     {       
         $SinError = ModeloCuentas::SeleccionarCuentasPorUsuario($idUsuario);
         return $SinError;              
+    }static public function MostrarCuentasPorUsuarioActivas($idUsuario)
+    {       
+        $SinError = ModeloCuentas::SeleccionarCuentasPorUsuarioActivas($idUsuario);
+        return $SinError;              
     }
 
 }

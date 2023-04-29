@@ -1,5 +1,7 @@
 /*INICIALIZANDO*/
 const lblContadorAlertas = document.querySelector("#ContadorAlertas");
+const txtNombreUsuario = document.querySelector("#txtNombreUsuario");
+const NombreCarrito = "Carrito" + txtNombreUsuario.value;
 
 document.addEventListener("DOMContentLoaded", () => {
     MostrarCantidadProductos();
@@ -9,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 /*Funciones */
 
 function MostrarCantidadProductos() {
-    if (JSON.parse(localStorage.getItem("Carrito")) == null) {
+    if (JSON.parse(localStorage.getItem(NombreCarrito)) == null) {
         lblContadorAlertas.innerHTML = ""
     } else {
-        lblContadorAlertas.innerHTML = Object.keys(JSON.parse(localStorage.getItem("Carrito"))).length
+        lblContadorAlertas.innerHTML = Object.keys(JSON.parse(localStorage.getItem(NombreCarrito))).length
     }
 }
 
@@ -28,29 +30,46 @@ function AddCarrito(idProducto, PrecioProducto) {
         }
         //Seleccionamos los datos
         var datos = {
+            "IdProducto": parseInt(idProducto),
             "Cantidad": parseInt(Cantidad.value),
             "Precio": PrecioProducto,
             "Descripcion": Descripcion.value,
         }
 
-        var Carrito = JSON.parse(localStorage.getItem("Carrito"));
+        var Carrito = JSON.parse(localStorage.getItem(NombreCarrito));
         Carrito["Item" + idProducto] = datos;
-        localStorage.setItem("Carrito", JSON.stringify(Carrito))
+        localStorage.setItem(NombreCarrito, JSON.stringify(Carrito))
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Producto Añadido al carrito'
+        })
     }
     MostrarCantidadProductos()
 }
 
 function CrearCarrito() {
-    var Carrito = JSON.parse(localStorage.getItem("Carrito"));
+    var Carrito = JSON.parse(localStorage.getItem(NombreCarrito));
     if (Carrito == null) {
-        localStorage.setItem("Carrito", JSON.stringify({}));
+        localStorage.setItem(NombreCarrito, JSON.stringify({}));
     }
 }
 
 function LimpiarCarrito() {
-    var Carrito = JSON.parse(localStorage.getItem("Carrito"));
+    var Carrito = JSON.parse(localStorage.getItem(NombreCarrito));
     if (Carrito != null) {
-        localStorage.removeItem("Carrito");
+        localStorage.removeItem(NombreCarrito);
     }
 }
 
@@ -62,7 +81,7 @@ function ValidarCantidadEnCarrito(Cantidad, Item) {
     let CantidadEnCarrito = 0;
 
     //Si el carrito esta vacio se retorna el metodo
-    var Carrito = JSON.parse(localStorage.getItem("Carrito"));
+    var Carrito = JSON.parse(localStorage.getItem(NombreCarrito));
 
     //Sino esta vacio, Sumamos las cantidades existentes
     for (var key in Carrito) {
@@ -99,13 +118,13 @@ function MostrarAlerta(Titulo, Cuerpo, Tipo) {
 
 function VerPreviadeCarrito() {
     var DetalleCarrito = document.querySelector("#ItemsCarrito");
-    var Carrito = JSON.parse(localStorage.getItem("Carrito"));
+    var Carrito = JSON.parse(localStorage.getItem(NombreCarrito));
     var btnVerCarrito = document.createElement('a')
     var ContenedorItem = document.createElement('div');
 
     //Creando Boton 
     btnVerCarrito.classList.add("dropdown-item", "text-center", "small", "text-gray-500")
-    btnVerCarrito.setAttribute('href', 'Login.php?Pagina=Dashboard&Modulo=Productos')
+    btnVerCarrito.setAttribute('href', 'Login.php?Pagina=Dashboard&Modulo=Pedidos&Accion=VerCarrito')
     btnVerCarrito.innerText = "Mostrar todo el carrito";
 
 

@@ -1,5 +1,5 @@
 <?php 
-if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
+if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==3){
  ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Super Market - Administrador</title>
+    <title>Super Market - Bodega</title>
 
     
     <!-- ===========IMPORTANDO CSS=============== -->
@@ -38,24 +38,25 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background:linear-gradient(6deg, rgba(4,19,40,1) 0%, rgba(12,80,171,1) 100%);"  id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background:linear-gradient(184deg, rgba(8,101,92,1) 0%, rgba(11,128,116,1) 49%, rgba(12,162,147,1) 100%);"  id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center mt-2" href="#">
-                <div class="sidebar-brand-icon rotate-n-15 ">
+                <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-box"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Super Market- Administrador</div>
+                <div class="sidebar-brand-text mx-3 mt-2">Super Market- Bodega</div>
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider my-0 mt-2">
 
             <!-- Nav Item - Dashboard -->
-          
 
             <!-- Heading -->
-           
+            <div class="sidebar-heading mt-3">
+                Pedidos
+            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -86,34 +87,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#CollapseUsers" aria-expanded="true" aria-controls="CollapseUsers">
-                    <i class="fas fa-fw fa-users"></i>    
-                
-                    <span>Usuarios</span>
-                </a>
-                <div id="CollapseUsers" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Administrar Usuarios</h6>
-                      
-                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Usuarios">Gestion de Usuarios</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fas fa-money-check-alt"></i> 
-                
-                    <span>Cuentas</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestionar Cuentas</h6>
-                        <a class="collapse-item" href="Login.php?Pagina=Dashboard&Modulo=Cuentas">Gestion de Cuentas</a>
-                        
-                    </div>
-                </div>
-            </li>
+            
 
             
 
@@ -194,22 +168,15 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                 <div class="container-fluid">
                 <!-- INICIO CONTENIDO -->
                 <?php 
-                    $llamarPaginas = new ControladorAdminDashboard();
+                require_once "Controlers/ctrBodegaDashboard.php";
+                $llamarPaginas = new ControladorBodegaDashboard();
                     if(isset($_GET["Modulo"])){
 
-                        require_once "Controlers/ctrAdminDashboard.php";
+                        
 
                         
                         switch ($_GET["Modulo"]) {
-                            case 'Usuarios':
-                               
-                                    if(isset($_GET["Accion"])){
-                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],$_GET["Accion"]);
-                                    }else{
-                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Usuarios");
-                                    }
-                                
-                                break;
+                            
                             case 'Productos':
                                 if(isset($_GET["Accion"])){
                                     $llamarPaginas ->MostrarModulo($_GET["Modulo"],$_GET["Accion"]);
@@ -218,14 +185,6 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                                 }
                                 
                                 break;
-                            case 'Cuentas':
-                                    if(isset($_GET["Accion"])){
-                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],$_GET["Accion"]);
-                                    }else{
-                                        $llamarPaginas ->MostrarModulo($_GET["Modulo"],"Cuentas");
-                                    }
-                                    
-                                    break; 
                             case 'Pedidos':
                                 if(isset($_GET["Accion"])){
                                     $llamarPaginas ->MostrarModulo($_GET["Modulo"],$_GET["Accion"]);
@@ -240,7 +199,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
                                 break;
                         }
                     }else{
-                        $llamarPaginas ->MostrarModulo("Usuarios","Usuarios");
+                        $llamarPaginas ->MostrarModulo("Productos","Productos");
                     }
                 ?>     
                 
@@ -256,7 +215,7 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Gestion de Pedidos 2021</span>
+                        <span>Copyright &copy; Super Market 2021</span>
                     </div>
                 </div>
             </footer>
@@ -318,10 +277,10 @@ if(isset($_SESSION["Usuario"])&&$_SESSION["Usuario"]["Rol"]==1){
     //Borramos todas las variables y mostramos nuevamente el login
      echo 
         '<script>
-                if(window.history.replaceState)
-                {
-                    window.history.replaceState(null,null,"Login.php");
-                }
+            if(window.history.replaceState)
+            {
+                window.history.replaceState(null,null,"Login.php");
+            }
             window.location.replace("Login.php");
 
         </script>';

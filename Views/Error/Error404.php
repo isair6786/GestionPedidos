@@ -27,7 +27,7 @@
                 <img width="400" src="assets/images/404.svg" alt="404">
                 <br>
                 <hr>
-                <a style="text-decoration : none;color:black;font-size:20px" href="Login.php">Regresar a Inicio</a>
+                <a style="text-decoration : none;color:black;font-size:20px" href="Login.php?Pagina=Dashboard">Regresar a Inicio</a>
             </div>
         </div>
    
